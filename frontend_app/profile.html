@@ -17,6 +17,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    
+    <div class="wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <p class="mb-0 phone pl-md-2">
+                        <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +90 555 123 45 67</a> 
+                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> iletisim@petlifecycle.com</a>
+                    </p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-md-end">
+                    <div class="social-media">
+                    <p class="mb-0 d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                    </p>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
@@ -27,15 +50,17 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.html" class="nav-link">Ana Sayfa</a></li>
+                    <li class="nav-item"><a href="pets.html" class="nav-link">Dostlarımız</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link">Hizmetler</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link">Hakkımızda</a></li>
-                    <li class="nav-item"><a href="pets.html" class="nav-link">Hayvanlar</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">İletişim</a></li>
+                    
+                    
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('images/grup2.png');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-end">
@@ -52,26 +77,35 @@
             <div class="row">
                 
                 <div class="col-md-4 mb-5">
-                    <div class="p-4 bg-light text-center rounded">
-                        <div class="icon d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 80px; height: 80px; background: #fff; border-radius: 50%;">
-                            <span class="flaticon-pawprint-1" style="font-size: 40px; color: #ffb400;"></span>
+                    <div class="p-4 bg-light text-center rounded shadow-sm">
+                        <div class="icon d-flex align-items-center justify-content-center mb-4 mx-auto" style="width: 100px; height: 100px; background: #fff; border-radius: 50%; border: 4px solid #ffb400;">
+                            <i class="fa fa-user-circle" style="font-size: 50px; color: #ffb400;"></i>
                         </div>
-                        <h3 class="mb-3" id="userNameDisplay">Yükleniyor...</h3>
-                        <p class="text-muted" id="userEmailDisplay">...</p>
-                        <p class="mb-0">
-                            <a href="#" id="logoutBtnProfile" class="btn btn-outline-danger py-2 px-4">Çıkış Yap</a>
-                        </p>
+                        <h3 class="mb-2" id="userNameDisplay">Yükleniyor...</h3>
+                        <p class="text-muted mb-4" id="userEmailDisplay">...</p>
+                        
+                        <div class="list-group list-group-flush text-left mb-4">
+                            <div class="list-group-item bg-transparent pl-0">
+                                <strong>Rol:</strong> <span class="badge badge-info">Kullanıcı</span>
+                            </div>
+                            <div class="list-group-item bg-transparent pl-0">
+                                <strong>Üyelik Tarihi:</strong> <span>2023</span>
+                            </div>
+                        </div>
+
+                        <a href="#" id="logoutBtnProfile" class="btn btn-danger btn-block py-2">Çıkış Yap</a>
                     </div>
                 </div>
 
                 <div class="col-md-8">
                     <h3 class="mb-4">Sahiplenme Başvurularım</h3>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
+                    <div class="table-responsive bg-white shadow-sm p-3 rounded">
+                        <table class="table table-hover align-middle">
                             <thead class="thead-primary">
                                 <tr>
+                                    <th>Resim</th>
                                     <th>Hayvan Adı</th>
-                                    <th>Başvuru Tarihi</th>
+                                    <th>Tür</th>
                                     <th>Durum</th>
                                 </tr>
                             </thead>
@@ -79,8 +113,11 @@
                                 </tbody>
                         </table>
                     </div>
-                    <div id="noDataMessage" class="alert alert-info" style="display: none;">
-                        Henüz bir sahiplenme başvurunuz bulunmuyor. <a href="pets.html">Hemen bir dost seçin!</a>
+                    
+                    <div id="noDataMessage" class="alert alert-warning mt-3 text-center" style="display: none;">
+                        <i class="fa fa-info-circle mr-2"></i> Henüz bir sahiplenme başvurunuz bulunmuyor. 
+                        <br><br>
+                        <a href="pets.html" class="btn btn-primary btn-sm">Hemen Bir Dost Seçin! 🐾</a>
                     </div>
                 </div>
 
@@ -119,7 +156,7 @@
             // 1. Kullanıcı Giriş Kontrolü
             var storedUser = localStorage.getItem("currentUser");
             if (!storedUser) {
-                alert("Lütfen önce giriş yapınız!");
+                // Eğer giriş yapmadıysa login sayfasına at
                 window.location.href = "login.html";
                 return;
             }
@@ -129,8 +166,11 @@
             $("#userEmailDisplay").text(user.email);
 
             // 2. Başvuruları Çek
+            // Backend'deki endpoint: /api/adoption/user/{userId}
+            var apiUrl = "http://localhost:8080/api/adoption/user/" + user.id;
+
             $.ajax({
-                url: "http://localhost:8080/api/applications/user/" + user.id,
+                url: apiUrl,
                 method: "GET",
                 success: function(applications) {
                     if (applications.length === 0) {
@@ -141,37 +181,52 @@
                         tbody.empty();
 
                         applications.forEach(function(app) {
-                            // Duruma göre renk belirle
+                            // Backend'den gelen statü (Enum)
+                            var rawStatus = app.basvuruDurumu; 
+                            
+                            // Gösterilecek metin ve renk ayarları
                             var badgeClass = "badge-secondary";
-                            var durumText = app.status;
+                            var statusText = rawStatus; // Varsayılan
 
-                            if (durumText === "APPROVED") { badgeClass = "badge-success"; durumText = "ONAYLANDI"; }
-                            else if (durumText === "REJECTED") { badgeClass = "badge-danger"; durumText = "REDDEDİLDİ"; }
-                            else if (durumText === "PENDING") { badgeClass = "badge-warning text-white"; durumText = "DEĞERLENDİRİLİYOR"; }
-                            else if (durumText === "IN_REVIEW") { badgeClass = "badge-info"; durumText = "İNCELEMEDE"; }
+                            if (rawStatus === "SUBMITTED") { 
+                                badgeClass = "badge-info"; 
+                                statusText = "İletildi / Bekliyor"; 
+                            } else if (rawStatus === "APPROVED") { 
+                                badgeClass = "badge-success"; 
+                                statusText = "ONAYLANDI ✅"; 
+                            } else if (rawStatus === "REJECTED") { 
+                                badgeClass = "badge-danger"; 
+                                statusText = "Reddedildi 🚫"; 
+                            } else if (rawStatus === "UNDER_REVIEW") {
+                                badgeClass = "badge-warning text-white";
+                                statusText = "İnceleniyor";
+                            }
 
-                            // Eğer tarih null ise "Tarih Yok" yaz
-                            var tarih = app.applicationDate ? new Date(app.applicationDate).toLocaleDateString() : "-";
+                            // Hayvan bilgisi kontrolü
+                            var petName = app.pet ? app.pet.isim : 'Bilinmiyor';
+                            var petType = app.pet ? app.pet.tur : '-';
+                            var petImg = (app.pet && app.pet.resimUrl) ? app.pet.resimUrl : 'images/image_1.jpg';
 
                             var row = `
                                 <tr>
-                                    <td class="font-weight-bold">${app.pet ? app.pet.isim : 'Bilinmeyen Pet'}</td>
-                                    <td>${tarih}</td>
-                                    <td><span class="badge ${badgeClass} p-2">${durumText}</span></td>
+                                    <td><img src="${petImg}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;"></td>
+                                    <td class="font-weight-bold">${petName}</td>
+                                    <td><span class="text-muted small">${petType}</span></td>
+                                    <td><span class="badge ${badgeClass} p-2" style="font-size: 12px;">${statusText}</span></td>
                                 </tr>
                             `;
                             tbody.append(row);
                         });
                     }
                 },
-                error: function(err) {
-                    console.error("Başvurular çekilemedi:", err);
-                    $("#applicationTableBody").html("<tr><td colspan='3' class='text-danger'>Veriler yüklenirken hata oluştu.</td></tr>");
+                error: function(xhr) {
+                    console.error("Başvurular çekilemedi:", xhr);
+                    $("#applicationTableBody").html("<tr><td colspan='4' class='text-center text-danger'>Veriler yüklenirken hata oluştu. Backend çalışıyor mu?</td></tr>");
                 }
             });
 
-            // Çıkış Butonu (Profil sayfasındaki özel buton)
-            $("#logoutBtnProfile").click(function(e) {
+            // Çıkış İşlemi (Hem Nav hem Profil butonu için)
+            $("#logoutBtnProfile, #navLogoutBtn").click(function(e) {
                 e.preventDefault();
                 if(confirm("Çıkış yapmak istediğinize emin misiniz?")) {
                     localStorage.removeItem("currentUser");

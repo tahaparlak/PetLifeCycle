@@ -17,7 +17,29 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+    <div class="wrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <p class="mb-0 phone pl-md-2">
+                        <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +90 555 123 45 67</a> 
+                        <a href="#"><span class="fa fa-paper-plane mr-1"></span> iletisim@petlifecycle.com</a>
+                    </p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-md-end">
+                    <div class="social-media">
+                    <p class="mb-0 d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+                    </p>
+            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html"><span class="flaticon-pawprint-1 mr-2"></span>PetLifecycle</a>
@@ -26,24 +48,17 @@
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Ana Sayfa</a></li>
-                    
+                    <li class="nav-item"><a href="index.html" class="nav-link">Ana Sayfa</a></li>
                     <li class="nav-item"><a href="pets.html" class="nav-link">Dostlarımız</a></li>
-                    
                     <li class="nav-item"><a href="services.html" class="nav-link">Hizmetler</a></li>
-                    
                     <li class="nav-item"><a href="about.html" class="nav-link">Hakkımızda</a></li>
-    
-                    <li class="nav-item cta">
-                        <a href="basvuru.html" class="nav-link">
-                            <span>Başvuru Yap</span>
-                        </a>
-                    </li>
+                    
                     <li class="nav-item"><a href="login.html" class="nav-link">Giriş Yap</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
@@ -72,7 +87,7 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="services-2 w-100 d-flex">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
                                 <div class="text pl-3">
@@ -81,7 +96,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
+
+                        <div class="col-md-6">
                             <div class="services-2 w-100 d-flex">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-grooming"></span></div>
                                 <div class="text pl-3">
@@ -90,6 +106,27 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="services-2 w-100 d-flex">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-venus-mars" style="font-size: 30px;"></span></div>
+                                <div class="text pl-3">
+                                    <h4>Cinsiyet</h4>
+                                    <p id="petGender">...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="services-2 w-100 d-flex">
+                                <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-medkit" style="font-size: 30px;"></span></div>
+                                <div class="text pl-3">
+                                    <h4>Sağlık/Aşı</h4>
+                                    <p id="petVaccine">...</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="services-2 w-100 d-flex">
                                 <div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dog-training"></span></div>
@@ -101,7 +138,7 @@
                         </div>
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-4" id="actionButtons">
                         <a href="#" id="adoptBtn" class="btn btn-primary py-3 px-4">Bu Arkadaşı Sahiplen</a>
                          <a href="pets.html" class="btn btn-secondary py-3 px-4">Geri Dön</a>
                     </div>
@@ -153,29 +190,43 @@
                 url: "http://localhost:8080/api/pets/" + petId,
                 method: "GET",
                 success: function(pet) {
-                    console.log("Gelen Veri:", pet);
-
                     // 3. HTML'i doldur
                     $("#petName").text(pet.isim);
-                    $("#petTypeBadge").text(pet.tur); // Enum (KEDI, KOPEK)
+                    $("#petTypeBadge").text(pet.tur);
                     $("#petAge").text(pet.yas + " Yaşında");
-                    $("#petWeight").text(pet.kilo + " Kg");
+                    $("#petWeight").text((pet.kilo || "-") + " Kg");
                     
-                    // Durum rengi ayarlama
+                    // Cinsiyet Formatlama
+                    let genderText = "Belirtilmemiş";
+                    if(pet.cinsiyet === 'ERKEK') genderText = "Erkek ♂";
+                    else if(pet.cinsiyet === 'DISI') genderText = "Dişi ♀";
+                    $("#petGender").text(genderText);
+
+                    // Aşı Durumu
+                    $("#petVaccine").text(pet.asiDurumu || "Bilgi Yok");
+
+                    // Durum Rengi
                     let statusText = pet.durum;
-                    $("#petStatus").text(statusText);
-                    if(statusText === 'AVAILABLE') {
-                        $("#petStatus").css("color", "green");
-                    } else {
-                        $("#petStatus").css("color", "red");
-                    }
+                    let statusColor = "black";
+                    if(statusText === 'AVAILABLE') statusColor = "green";
+                    else if(statusText === 'ADOPTED') statusColor = "gray";
+                    else if(statusText === 'PENDING') statusColor = "#ffc107"; // Sarı
+                    
+                    $("#petStatus").text(statusText).css("color", statusColor);
 
                     // Resmi güncelle
                     if (pet.resimUrl) {
                         $("#petDetailImage").css("background-image", "url(" + pet.resimUrl + ")");
                     }
 
-                    $("#adoptBtn").attr("href", "basvuru.html?petId=" + pet.id);
+                    // --- BUTON MANTIĞI ---
+                    if (pet.durum === 'ADOPTED') {
+                        // Sahiplenildiyse butonu değiştir
+                        $("#adoptBtn").replaceWith('<button class="btn btn-secondary py-3 px-4" disabled style="cursor: not-allowed;">Bu Dostumuz Yuvasında 🏠</button>');
+                    } else {
+                        // Müsaitse linki güncelle (Türkçe karakter sorunu olmasın diye encodeURIComponent)
+                        $("#adoptBtn").attr("href", "basvuru.html?petId=" + pet.id + "&petName=" + encodeURIComponent(pet.isim));
+                    }
                 },
                 error: function(err) {
                     console.error("Hata:", err);

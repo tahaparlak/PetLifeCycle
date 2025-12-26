@@ -1,61 +1,154 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <title>PetLifecycle - Gelişmiş Yönetici Paneli</title>
+    <title>PetLifecycle - Yönetim Paneli</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/style.css">
     
-    <style>
-        .nav-pills .nav-link.active { background-color: #ffb400; color: #fff; }
-        .nav-pills .nav-link { color: #333; font-weight: 600; }
-        .table img { width: 50px; height: 50px; object-fit: cover; border-radius: 50%; }
-        /* Tablo hücrelerini dikey ortala */
-        .table td, .table th { vertical-align: middle; }
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css"> <style>
+        /* --- MODERN UI STYLES --- */
+        body { background-color: #f4f6f9; font-family: 'Montserrat', sans-serif; }
+        
+        /* Navbar */
+        .admin-navbar { background: #343a40; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .admin-brand { font-weight: 700; letter-spacing: 1px; color: #ffb400 !important; }
+
+        /* Kart Yapısı */
+        .card-modern {
+            background: #fff;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.2s;
+        }
+        
+        /* Sekmeler (Tabs) */
+        .nav-pills .nav-link {
+            border-radius: 30px;
+            padding: 10px 25px;
+            font-weight: 600;
+            color: #6c757d;
+            background: #fff;
+            margin: 0 5px;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #ffb400;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(255, 180, 0, 0.4);
+            border-color: #ffb400;
+        }
+        
+        /* Modern Tablo */
+        .table-modern { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        .table-modern thead th {
+            border: none;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #8898aa;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+        }
+        .table-modern tbody tr {
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+        .table-modern tbody tr:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .table-modern td {
+            border: none;
+            padding: 20px;
+            vertical-align: middle;
+            border-top: 1px solid #f8f9fa;
+        }
+        .table-modern td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+        .table-modern td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+        
+        /* Resimler */
+        .pet-avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffb400;
+            padding: 2px;
+        }
+
+        /* İkonlar ve Rozetler */
+        .icon-box {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .icon-diet { background: #fff3cd; color: #856404; } /* Sarı */
+        .icon-vaccine { background: #d4edda; color: #155724; } /* Yeşil */
+        
+        .status-dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark admin-navbar">
         <div class="container">
-            <a class="navbar-brand" href="index.html">PetLifecycle Admin</a>
+            <a class="navbar-brand admin-brand" href="index.html">
+                <i class="fa fa-paw fa-lg"></i> PetLifecycle Admin
+            </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Siteye Dön</a></li>
-                    <li class="nav-item"><a href="#" id="logoutBtn" class="nav-link btn btn-danger mt-2 text-white">Çıkış</a></li>
+                    <li class="nav-item text-white mr-3 d-flex align-items-center">
+                        <span id="adminNameBadge">Yönetici</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="index.html" class="btn btn-outline-light btn-sm mr-2">Siteye Dön</a>
+                        <button id="logoutBtn" class="btn btn-danger btn-sm">Çıkış <i class="fa fa-sign-out"></i></button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="ftco-section bg-light">
+    <section class="ftco-section pt-5">
         <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="mb-0">Yönetim Merkezi</h2>
-                <div id="adminNameBadge" class="badge badge-warning p-2 text-white" style="font-size: 1rem;">...</div>
-            </div>
-
-            <ul class="nav nav-pills mb-4 justify-content-center bg-white p-2 rounded shadow-sm" id="pills-tab" role="tablist">
+            
+            <ul class="nav nav-pills mb-5 justify-content-center" id="pills-tab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="pills-apps-tab" data-toggle="pill" href="#pills-apps" role="tab">📜 Bekleyen Başvurular</a>
+                    <a class="nav-link active" id="pills-apps-tab" data-toggle="pill" href="#pills-apps" role="tab">
+                        <i class="fa fa-file-text-o"></i> Başvurular
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-pets-tab" data-toggle="pill" href="#pills-pets" role="tab">🐶 Hayvan Yönetimi</a>
+                    <a class="nav-link" id="pills-pets-tab" data-toggle="pill" href="#pills-pets" role="tab">
+                        <i class="fa fa-paw"></i> Hayvan Yönetimi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-diet-tab" data-toggle="pill" href="#pills-diet" role="tab">
+                        <i class="fa fa-leaf"></i> Diyet (Egzotik)
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-vaccine-tab" data-toggle="pill" href="#pills-vaccine" role="tab">
+                        <i class="fa fa-heartbeat"></i> Aşı Takvimi
+                    </a>
                 </li>
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
                 
                 <div class="tab-pane fade show active" id="pills-apps" role="tabpanel">
-                    <div class="bg-white p-4 rounded shadow-sm">
-                        <h4 class="mb-3">Onay Bekleyen İşlemler</h4>
+                    <div class="card-modern">
+                        <h4 class="mb-4">📋 Onay Bekleyen Sahiplenme İstekleri</h4>
                         <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead class="thead-dark">
+                            <table class="table-modern">
+                                <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Kullanıcı</th>
@@ -64,37 +157,75 @@
                                         <th>İşlemler</th>
                                     </tr>
                                 </thead>
-                                <tbody id="applicationsTable">
-                                    </tbody>
+                                <tbody id="applicationsTable"></tbody>
                             </table>
                         </div>
-                        <div id="noAppsMsg" class="text-center text-muted mt-3" style="display:none;">Hiçbir başvuru yok.</div>
+                        <div id="noAppsMsg" class="text-center text-muted mt-3 p-5" style="display:none;">
+                            <i class="fa fa-check-circle fa-3x mb-3 text-success"></i><br>Bekleyen başvuru yok.
+                        </div>
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="pills-pets" role="tabpanel">
-                    <div class="bg-white p-4 rounded shadow-sm">
-                        <div class="d-flex justify-content-between mb-3 align-items-center">
-                            <h4 class="mb-0">Kayıtlı Dostlarımız</h4>
-                            <button class="btn btn-success" data-toggle="modal" data-target="#addPetModal">
+                    <div class="card-modern">
+                        <div class="d-flex justify-content-between mb-4 align-items-center">
+                            <h4 class="mb-0">🐶 Kayıtlı Dostlarımız</h4>
+                            <button class="btn btn-success rounded-pill px-4" data-toggle="modal" data-target="#addPetModal">
                                 <i class="fa fa-plus"></i> Yeni Ekle
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <table class="table align-middle table-striped">
-                                <thead class="thead-light">
+                            <table class="table-modern">
+                                <thead>
                                     <tr>
                                         <th>Resim</th>
-                                        <th>İsim</th>
-                                        <th>Tür</th>
-                                        <th>Yaş / Kilo</th>
-                                        <th>Durum (Değiştir)</th>
-                                        <th>Sağlık</th>
-                                        <th>Sil</th>
+                                        <th>İsim & Tür</th>
+                                        <th>Detaylar</th>
+                                        <th>Durum</th>
+                                        <th>Yönetim</th>
                                     </tr>
                                 </thead>
-                                <tbody id="petsTable">
-                                    </tbody>
+                                <tbody id="petsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-diet" role="tabpanel">
+                    <div class="card-modern border-left-warning">
+                        <h4 class="mb-4 text-warning"><i class="fa fa-apple"></i> Egzotik & Kuş Diyet Takibi</h4>
+                        <div class="table-responsive">
+                            <table class="table-modern">
+                                <thead>
+                                    <tr>
+                                        <th>Profil</th>
+                                        <th>İsim</th>
+                                        <th>Aktif Program</th>
+                                        <th>Sonraki Tarih</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dietTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-vaccine" role="tabpanel">
+                    <div class="card-modern border-left-success">
+                        <h4 class="mb-4 text-success"><i class="fa fa-medkit"></i> Evcil Hayvan Aşı Takibi</h4>
+                        <div class="table-responsive">
+                            <table class="table-modern">
+                                <thead>
+                                    <tr>
+                                        <th>Profil</th>
+                                        <th>İsim</th>
+                                        <th>Sıradaki Aşı</th>
+                                        <th>Tarih</th>
+                                        <th>Durum</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vaccineTable"></tbody>
                             </table>
                         </div>
                     </div>
@@ -105,84 +236,56 @@
     </section>
 
     <div class="modal fade" id="addPetModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title text-white">Yeni Dost Ekle</h5>
+                    <h5 class="modal-title font-weight-bold">Yeni Dost Ekle</h5>
                     <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-4">
                     <form id="addPetForm">
                         <div class="form-group">
-                            <label>İsim</label>
-                            <input type="text" id="newPetName" class="form-control" placeholder="Örn: Pamuk" required>
+                            <label class="text-muted small font-weight-bold">İSİM</label>
+                            <input type="text" id="newPetName" class="form-control" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>Tür</label>
+                                    <label class="text-muted small font-weight-bold">TÜR</label>
                                     <select id="newPetType" class="form-control">
                                         <option value="KEDI">Kedi</option>
                                         <option value="KOPEK">Köpek</option>
                                         <option value="EXOTIC">Egzotik</option>
+                                        <option value="KUS">Kuş</option>
+                                        <option value="TAVSAN">Tavşan</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label>Durum</label>
+                                    <label class="text-muted small font-weight-bold">DURUM</label>
                                     <select id="newPetStatus" class="form-control">
-                                        <option value="AVAILABLE" selected>Sahiplendirilebilir</option>
+                                        <option value="AVAILABLE">Müsait</option>
                                         <option value="ADOPTED">Sahiplenildi</option>
-                                        <option value="PENDING">Rezerve/Beklemede</option>
+                                        <option value="PENDING">Rezerve</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Yaş</label>
-                                    <input type="number" id="newPetAge" class="form-control" required>
-                                </div>
+                            <div class="col-6">
+                                <div class="form-group"><label class="text-muted small font-weight-bold">YAŞ</label><input type="number" id="newPetAge" class="form-control" required></div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Kilo (kg)</label>
-                                    <input type="number" step="0.1" id="newPetWeight" class="form-control" placeholder="Örn: 4.5" required>
-                                </div>
+                            <div class="col-6">
+                                <div class="form-group"><label class="text-muted small font-weight-bold">KİLO (KG)</label><input type="number" step="0.1" id="newPetWeight" class="form-control" required></div>
                             </div>
                         </div>
-                         <div class="form-group">
-                            <label>Resim URL</label>
+                        <div class="form-group">
+                            <label class="text-muted small font-weight-bold">RESİM URL</label>
                             <input type="text" id="newPetImg" class="form-control" value="images/gallery-1.jpg">
-                            <small class="text-muted">Varsayılan: images/gallery-1.jpg</small>
                         </div>
-                        <button type="submit" class="btn btn-success w-100 py-3">Kaydet ve Yayınla</button>
+                        <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill shadow-sm">Kaydet</button>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="scheduleModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="scheduleTitle">Sağlık Takvimi</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Aşı/İşlem Adı</th>
-                                <th>Tarih</th>
-                                <th>Durum</th>
-                            </tr>
-                        </thead>
-                        <tbody id="scheduleTableBody"></tbody>
-                    </table>
                 </div>
             </div>
         </div>
@@ -194,17 +297,39 @@
 
     <script>
         $(document).ready(function() {
-            // GÜVENLİK
+            // Güvenlik
             var storedUser = localStorage.getItem("currentUser");
             if (!storedUser) { window.location.href = "login.html"; return; }
             var user = JSON.parse(storedUser);
             if (user.rol !== 'ADMIN') { window.location.href = "index.html"; return; }
-            $("#adminNameBadge").text("Yönetici: " + user.ad);
+            $("#adminNameBadge").html(`<i class="fa fa-user-circle mr-1"></i> ${user.ad}`);
 
+            // Çıkış Butonu
+            $("#logoutBtn").click(function(){
+                if(confirm("Çıkış yapılsın mı?")) {
+                    localStorage.removeItem("currentUser");
+                    window.location.href = "index.html";
+                }
+            });
+
+            // İlk Yüklemeler
             loadPendingApplications();
             loadPets();
+            loadDietPrograms();
+            loadVaccineSchedules();
 
-            // 1. BAŞVURULARI GETİR
+            // Sekme Geçişlerinde Veri Tazeleme
+            $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+                var target = $(e.target).attr("href");
+                if (target === "#pills-pets") loadPets();
+                else if (target === "#pills-diet") loadDietPrograms();
+                else if (target === "#pills-vaccine") loadVaccineSchedules();
+                else if (target === "#pills-apps") loadPendingApplications();
+            });
+
+            // --- FONKSİYONLAR ---
+
+            // 1. BAŞVURULAR
             function loadPendingApplications() {
                 $.ajax({
                     url: "http://localhost:8080/api/admin/applications/pending",
@@ -217,24 +342,31 @@
 
                         apps.forEach(app => {
                             var row = `
-                                <tr>
-                                    <td>#${app.id}</td>
-                                    <td>${app.user ? app.user.ad : '-'}</td>
-                                    <td><span class="badge badge-info">${app.pet.tur}</span> ${app.pet.isim}</td>
-                                    <td><small>${app.requestedInfoDetails || '-'}</small></td>
+                                <tr id="row-${app.id}">
+                                    <td class="font-weight-bold">#${app.id}</td>
+                                    <td><i class="fa fa-user text-muted mr-1"></i> ${app.user ? app.user.ad : '-'}</td>
                                     <td>
-                                        <button onclick="approveApp(${app.id})" class="btn btn-sm btn-success" title="Onayla"><i class="fa fa-check"></i></button>
-                                        <button onclick="rejectApp(${app.id})" class="btn btn-sm btn-danger" title="Reddet"><i class="fa fa-times"></i></button>
+                                        <div class="d-flex align-items-center">
+                                            <img src="${app.pet.resimUrl || 'images/image_1.jpg'}" class="pet-avatar mr-2">
+                                            <div>
+                                                <strong>${app.pet.isim}</strong><br>
+                                                <small class="text-muted">${app.pet.tur}</small>
+                                            </div>
+                                        </div>
                                     </td>
-                                </tr>
-                            `;
+                                    <td><div class="bg-light p-2 rounded small text-muted" style="max-width: 250px;">${app.requestedInfoDetails || '-'}</div></td>
+                                    <td id="actions-${app.id}">
+                                        <button onclick="approveApp(${app.id})" class="btn btn-sm btn-success rounded-circle shadow-sm mr-1" title="Onayla"><i class="fa fa-check"></i></button>
+                                        <button onclick="rejectApp(${app.id})" class="btn btn-sm btn-danger rounded-circle shadow-sm" title="Reddet"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>`;
                             tbody.append(row);
                         });
                     }
                 });
             }
 
-            // 2. HAYVANLARI GETİR (GÜNCELLENDİ: Dropdown ve Sil Butonu)
+            // 2. HAYVANLAR
             function loadPets() {
                 $.ajax({
                     url: "http://localhost:8080/api/pets",
@@ -243,158 +375,295 @@
                         var tbody = $("#petsTable");
                         tbody.empty();
                         pets.forEach(pet => {
-                            // Sağlık Butonu
-                            let scheduleBtn = `<span class="text-muted">-</span>`;
-                            if (pet.durum === 'ADOPTED') {
-                                let btnText = pet.tur === 'EXOTIC' ? 'Diyet Planı' : 'Aşı Takvimi';
-                                let btnClass = pet.tur === 'EXOTIC' ? 'btn-warning' : 'btn-info';
-                                scheduleBtn = `<button onclick="showSchedule(${pet.id}, '${pet.isim}')" class="btn btn-sm ${btnClass}">${btnText}</button>`;
-                            }
+                            // Durum Rozeti
+                            let statusBadge = "";
+                            if(pet.durum === 'AVAILABLE') statusBadge = '<span class="badge badge-success">Müsait</span>';
+                            else if(pet.durum === 'ADOPTED') statusBadge = '<span class="badge badge-secondary">Sahiplenildi</span>';
+                            else statusBadge = '<span class="badge badge-warning">Rezerve</span>';
 
-                            // Kilo Kontrolü (Null ise - yaz)
-                            let weightText = pet.kilo ? pet.kilo + " kg" : "-";
-
+                            // Statü Seçimi HTML'i (Sahiplenildiyse değiştirilemez olsun)
+                            let selectDisabled = (pet.durum === 'ADOPTED') ? 'disabled' : '';
+                            
                             var row = `
                                 <tr>
-                                    <td><img src="${pet.resimUrl}" alt="pet"></td>
-                                    <td class="font-weight-bold">${pet.isim}</td>
-                                    <td>${pet.tur}</td>
-                                    <td>${pet.yas} yaş / ${weightText}</td>
+                                    <td><img src="${pet.resimUrl}" class="pet-avatar"></td>
                                     <td>
-                                        <select class="form-control form-control-sm" onchange="changeStatus(${pet.id}, this.value)" 
-                                            style="width: 130px; border-color: ${getColor(pet.durum)}; color: ${getColor(pet.durum)}; font-weight:bold;">
-                                            <option value="AVAILABLE" ${pet.durum === 'AVAILABLE' ? 'selected' : ''}>Müsait</option>
-                                            <option value="ADOPTED" ${pet.durum === 'ADOPTED' ? 'selected' : ''}>Sahiplenildi</option>
-                                            <option value="PENDING" ${pet.durum === 'PENDING' ? 'selected' : ''}>Rezerve</option>
-                                        </select>
+                                        <span class="d-block font-weight-bold">${pet.isim}</span>
+                                        <span class="small text-muted">${pet.tur}</span>
                                     </td>
-                                    <td>${scheduleBtn}</td>
+                                    <td><small>${pet.yas} Yaş / ${pet.kilo || '-'} kg</small></td>
                                     <td>
-                                        <button onclick="deletePet(${pet.id})" class="btn btn-sm btn-outline-danger" title="Sil">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                        ${statusBadge}
                                     </td>
-                                </tr>
-                            `;
+                                    <td>
+                                    <button onclick="viewFullSchedule(${pet.id}, '${pet.isim}')" class="btn btn-sm btn-info mr-1" title="Tüm Planı Gör">
+                                    <i class="fa fa-calendar"></i> Plan
+                                    </button>
+                                </td>
+                                    <td>
+                                        <button onclick="deletePet(${pet.id})" class="btn btn-sm btn-outline-danger" title="Sil"><i class="fa fa-trash"></i></button>
+                                    </td>
+                                </tr>`;
                             tbody.append(row);
                         });
                     }
                 });
             }
 
-            // 3. HAYVAN EKLE (Kilo dahil)
+            // 3. DİYET PROGRAMI (İkonlu)
+            function loadDietPrograms() {
+                $.ajax({
+                    url: "http://localhost:8080/api/pets",
+                    method: "GET",
+                    success: function(pets) {
+                        var tbody = $("#dietTable");
+                        tbody.empty();
+                        var exoticPets = pets.filter(p => p.tur === 'EXOTIC' || p.tur === 'KUS' || p.tur === 'TAVSAN');
+                        
+                        exoticPets.forEach(pet => {
+                            $.ajax({
+                                url: `http://localhost:8080/api/pets/${pet.id}/schedule`,
+                                method: "GET",
+                                success: function(schedules) {
+                                    var lastSchedule = schedules.length > 0 ? schedules[schedules.length-1] : null;
+                                    var planName = lastSchedule ? lastSchedule.asiAdi : "Planlanmadı";
+                                    var dateStr = lastSchedule && lastSchedule.sonrakiTarih ? new Date(lastSchedule.sonrakiTarih).toLocaleDateString() : "-";
+                                    
+                                    var statusHtml = getStatusHtml(lastSchedule ? lastSchedule.sonrakiTarih : null);
+
+                                    var row = `
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="${pet.resimUrl}" class="pet-avatar mr-3">
+                                                    <div class="icon-box icon-diet"><i class="fa fa-apple"></i></div>
+                                                </div>
+                                            </td>
+                                            <td class="font-weight-bold">${pet.isim} <br><small class="text-muted">${pet.tur}</small></td>
+                                            <td>${planName}</td>
+                                            <td>${dateStr}</td>
+                                            <td>${statusHtml}</td>
+                                        </tr>`;
+                                    tbody.append(row);
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+
+            // 4. AŞI TAKVİMİ (İkonlu)
+            function loadVaccineSchedules() {
+                $.ajax({
+                    url: "http://localhost:8080/api/pets",
+                    method: "GET",
+                    success: function(pets) {
+                        var tbody = $("#vaccineTable");
+                        tbody.empty();
+                        var domesticPets = pets.filter(p => p.tur === 'KEDI' || p.tur === 'KOPEK');
+                        
+                        domesticPets.forEach(pet => {
+                            $.ajax({
+                                url: `http://localhost:8080/api/pets/${pet.id}/schedule`,
+                                method: "GET",
+                                success: function(schedules) {
+                                    var lastSchedule = schedules.length > 0 ? schedules[schedules.length-1] : null;
+                                    var vaccineName = lastSchedule ? lastSchedule.asiAdi : "Beklemede";
+                                    var dateStr = lastSchedule && lastSchedule.sonrakiTarih ? new Date(lastSchedule.sonrakiTarih).toLocaleDateString() : "-";
+                                    
+                                    if(pet.durum === 'ADOPTED' && !lastSchedule) vaccineName = "Sahiplenildi (Takip Dışı)";
+
+                                    var statusHtml = getStatusHtml(lastSchedule ? lastSchedule.sonrakiTarih : null);
+
+                                    var row = `
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="${pet.resimUrl}" class="pet-avatar mr-3">
+                                                    <div class="icon-box icon-vaccine"><i class="fa fa-medkit"></i></div>
+                                                </div>
+                                            </td>
+                                            <td class="font-weight-bold">${pet.isim} <br><small class="text-muted">${pet.tur}</small></td>
+                                            <td>${vaccineName}</td>
+                                            <td>${dateStr}</td>
+                                            <td>${statusHtml}</td>
+                                        </tr>`;
+                                    tbody.append(row);
+                                }
+                            });
+                        });
+                    }
+                });
+            }
+
+            // YARDIMCI: Tarih Durumu Renklendirme
+            function getStatusHtml(dateStr) {
+                if(!dateStr) return '<span class="text-muted">-</span>';
+                
+                var due = new Date(dateStr);
+                var today = new Date();
+                today.setHours(0,0,0,0); // Saati sıfırla
+
+                if(due < today) return '<span class="badge badge-danger">Gecikmiş</span>';
+                if(due.getTime() === today.getTime()) return '<span class="badge badge-warning text-white">Bugün!</span>';
+                return '<span class="badge badge-info">Planlandı</span>';
+            }
+
+            // YENİ HAYVAN EKLEME
             $("#addPetForm").on("submit", function(e){
                 e.preventDefault();
                 var petData = {
                     isim: $("#newPetName").val(),
                     tur: $("#newPetType").val(),
                     yas: $("#newPetAge").val(),
-                    kilo: $("#newPetWeight").val(), // YENİ
-                    durum: $("#newPetStatus").val(), // YENİ: Seçilen durumu al
+                    kilo: $("#newPetWeight").val(),
+                    durum: $("#newPetStatus").val(),
                     resimUrl: $("#newPetImg").val()
                 };
-
                 $.ajax({
                     url: "http://localhost:8080/api/pets",
                     method: "POST",
                     contentType: "application/json",
                     data: JSON.stringify(petData),
-                    success: function() {
-                        $("#addPetModal").modal("hide");
-                        loadPets(); // Listeyi yenile
+                    success: function() { 
+                        $("#addPetModal").modal("hide"); 
+                        alert("Hayvan eklendi ve takvim oluşturuldu! ✅");
+                        loadPets(); 
                     }
                 });
             });
         });
 
-        // --- GLOBAL FONKSİYONLAR ---
-
-        // Statü Rengi Yardımcısı
-        function getColor(status) {
-            if(status === 'AVAILABLE') return '#28a745'; // Yeşil
-            if(status === 'ADOPTED') return '#6c757d';   // Gri
-            if(status === 'PENDING') return '#ffc107';   // Sarı
-            return '#000';
-        }
-
-        // STATÜ DEĞİŞTİRME (ANLIK)
+        // GLOBAL FONKSİYONLAR
         function changeStatus(id, newStatus) {
-            $.ajax({
-                url: `http://localhost:8080/api/pets/${id}/status`,
-                method: "PUT",
-                contentType: "application/json",
-                data: JSON.stringify({ status: newStatus }),
-                success: function() {
-                    // Başarılı olursa hiçbir şey yapmaya gerek yok, zaten değişti.
-                    // İstersen bildirim gösterebilirsin: console.log("Statü güncellendi");
-                    location.reload(); // Renklerin tam oturması için sayfayı yenilemek en temizi
-                },
-                error: function() {
-                    alert("Statü güncellenemedi!");
-                }
-            });
+            $.ajax({ url: `http://localhost:8080/api/pets/${id}/status`, method: "PUT", contentType: "application/json", data: JSON.stringify({ status: newStatus }), success: function() { loadPets(); } }); // Sayfa yenilenmeden tabloyu yenile
         }
-
-        // HAYVAN SİLME
         function deletePet(id) {
-            if(!confirm("Bu kaydı kalıcı olarak silmek istediğinize emin misiniz?")) return;
-
-            $.ajax({
-                url: `http://localhost:8080/api/pets/${id}`,
-                method: "DELETE",
-                success: function() {
-                    location.reload();
-                },
-                error: function() {
-                    alert("Silme işlemi başarısız!");
-                }
-            });
+            if(confirm("Silmek istiyor musunuz?")) {
+                $.ajax({ url: `http://localhost:8080/api/pets/${id}`, method: "DELETE", success: function() { loadPets(); } });
+            }
         }
-
-        // ... (generateUUID, approveApp, rejectApp, showSchedule fonksiyonları önceki ile aynı kalacak) ...
         function generateUUID() { return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) { var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8); return v.toString(16); }); }
         
         function approveApp(id) {
-            if(!confirm("Onaylıyor musunuz?")) return;
+            if(!confirm("Bu başvuruyu onaylıyor musunuz?")) return;
             $.ajax({
                 url: `http://localhost:8080/api/admin/applications/${id}/approve`,
                 method: "POST",
                 headers: { "Idempotency-Key": generateUUID() },
-                success: function() { alert("Onaylandı!"); location.reload(); },
+                success: function() {
+                    // Anlık UI Değişimi
+                    $("#actions-" + id).html('<span class="badge badge-success p-2">Onaylandı ✅</span>');
+                    $("#row-" + id).css("opacity", "0.5");
+                },
                 error: function(xhr) { alert("Hata: " + xhr.responseText); }
             });
         }
-
+        
         function rejectApp(id) {
-            var reason = prompt("Sebep:");
+            var reason = prompt("Reddetme sebebi:");
             if(!reason) return;
-            $.ajax({
-                url: `http://localhost:8080/api/admin/applications/${id}/reject`,
-                method: "POST",
-                headers: { "Idempotency-Key": generateUUID() },
-                contentType: "application/json",
-                data: JSON.stringify({ reason: reason }),
-                success: function() { alert("Reddedildi."); location.reload(); }
-            });
+            $.ajax({ url: `http://localhost:8080/api/admin/applications/${id}/reject`, method: "POST", headers: { "Idempotency-Key": generateUUID() }, contentType: "application/json", data: JSON.stringify({ reason: reason }), success: function() { 
+                $("#actions-" + id).html('<span class="badge badge-danger p-2">Reddedildi 🚫</span>');
+                $("#row-" + id).css("opacity", "0.5");
+            } });
         }
 
-        function showSchedule(petId, petName) {
-            $("#scheduleTitle").text(petName + " İçin Sağlık Takvimi");
+        // TÜM PLANI GÖSTEREN FONKSİYON
+        function viewFullSchedule(petId, petName) {
+            // 1. Modal Başlığını Ayarla
+            $("#scheduleModalTitle").html(`<i class="fa fa-paw"></i> ${petName} - Tüm Sağlık Takvimi`);
+            
+            // 2. Tabloyu Temizle ve Yükleniyor Göster
+            var tbody = $("#scheduleTableBody");
+            tbody.html('<tr><td colspan="3" class="text-center">Yükleniyor...</td></tr>');
+            $("#scheduleModal").modal("show"); // Pencereyi aç
+
+            // 3. Backend'den Veriyi Çek
             $.ajax({
                 url: `http://localhost:8080/api/pets/${petId}/schedule`,
                 method: "GET",
                 success: function(schedules) {
-                    var tbody = $("#scheduleTableBody");
                     tbody.empty();
-                    if(schedules.length === 0) tbody.html("<tr><td colspan='3'>Veri yok.</td></tr>");
-                    schedules.forEach(item => {
-                        var tarih = item.scheduledDate ? new Date(item.scheduledDate).toLocaleDateString() : '-';
-                        tbody.append(`<tr><td>${item.vaccineName}</td><td>${tarih}</td><td>${item.status}</td></tr>`);
-                    });
-                    $("#scheduleModal").modal("show");
+                    
+                    if (schedules.length === 0) {
+                        $("#noScheduleMsg").show();
+                    } else {
+                        $("#noScheduleMsg").hide();
+                        
+                        // Tarihe göre sırala (Eskiden yeniye)
+                        schedules.sort((a, b) => new Date(a.sonrakiTarih) - new Date(b.sonrakiTarih));
+
+                        schedules.forEach(item => {
+                            var dateObj = new Date(item.sonrakiTarih);
+                            var dateStr = dateObj.toLocaleDateString();
+                            var today = new Date();
+                            today.setHours(0,0,0,0);
+
+                            // Durum Analizi
+                            let statusHtml = "";
+                            let rowClass = "";
+
+                            if (dateObj < today) {
+                                statusHtml = '<span class="badge badge-success">Tamamlandı / Geçti</span>';
+                                rowClass = "text-muted"; // Geçmiş işlemler soluk görünsün
+                            } else if (dateObj.getTime() === today.getTime()) {
+                                statusHtml = '<span class="badge badge-warning text-white">BUGÜN!</span>';
+                                rowClass = "font-weight-bold bg-light"; // Bugünkünü vurgula
+                            } else {
+                                statusHtml = '<span class="badge badge-info">Planlandı</span>';
+                            }
+
+                            var row = `
+                                <tr class="${rowClass}">
+                                    <td>${item.asiAdi}</td>
+                                    <td>${dateStr}</td>
+                                    <td>${statusHtml}</td>
+                                </tr>
+                            `;
+                            tbody.append(row);
+                        });
+                    }
+                },
+                error: function() {
+                    tbody.html('<tr><td colspan="3" class="text-danger text-center">Veriler alınamadı.</td></tr>');
                 }
             });
         }
+
     </script>
+
+    <div class="modal fade" id="scheduleModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered"> <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title font-weight-bold" id="scheduleModalTitle">Sağlık Planı</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>İşlem Adı (Aşı/Bakım)</th>
+                                    <th>Planlanan Tarih</th>
+                                    <th>Durum</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody id="scheduleTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                    <div id="noScheduleMsg" class="text-center p-4 text-muted" style="display:none;">
+                        Bu dostumuz için henüz bir plan oluşturulmamış.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
